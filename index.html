@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vish — The Wish God Fulfills Everyday</title>
+    
+    <!-- Creative Glowing Heart Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+    
+    <!-- Meta Tags for SEO & Presentation -->
+    <meta name="description" content="An extraordinary, cinematic, and interactive birthday journey for Dr. Vishwa Jambudiya. A sky of memories, stars, and gratitude.">
+    <meta property="og:title" content="Vish — The Wish God Fulfills Everyday">
+    <meta property="og:description" content="An extraordinary interactive birthday universe for Dr. Vishwa Jambudiya.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/accessibility.css">
+    
+    <!-- Libraries (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body class="landing-body dark-theme">
+    
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+        <div class="cursor-label"></div>
+    </div>
+
+    <!-- Background Stars Canvas -->
+    <canvas id="stars-canvas" class="background-canvas"></canvas>
+    
+    <!-- Particle Explosion Canvas (Transition) -->
+    <canvas id="explosion-canvas" class="foreground-canvas"></canvas>
+
+    <!-- COUNTDOWN / PASSWORD ENTRY OVERLAY GATE -->
+    <div id="timer-gate-overlay" class="timer-gate-overlay">
+        <div class="timer-gate-split-container">
+            
+            <!-- Left Side: Visuals Panel (Minions Frame) -->
+            <div class="gate-left-panel">
+                <div class="visual-glass-frame">
+                    <!-- Animated Minions SVG Scene -->
+                    <div class="minions-scene-wrapper">
+                        <svg class="minions-svg" viewBox="0 0 500 300" width="100%">
+                          <defs>
+                            <linearGradient id="denim" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stop-color="#2a75d3" />
+                              <stop offset="100%" stop-color="#124898" />
+                            </linearGradient>
+                            <linearGradient id="banana" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stop-color="#ffe600" />
+                              <stop offset="100%" stop-color="#f5c400" />
+                            </linearGradient>
+                            <linearGradient id="choc" x1="0" y1="0" x2="1" y2="0">
+                              <stop offset="0%" stop-color="#5c3a21" />
+                              <stop offset="100%" stop-color="#3d2411" />
+                            </linearGradient>
+                          </defs>
+                          
+                          <!-- Minion 1: Mayur (Girl - Left side, eating chocolate) -->
+                          <g class="minion minion-girl">
+                            <!-- Hair Bows / Pigtails -->
+                            <g class="hair-pigtails">
+                              <circle cx="125" cy="100" r="10" fill="#ff758c" />
+                              <circle cx="195" cy="100" r="10" fill="#ff758c" />
+                              <path d="M125,100 L115,90 M125,100 L110,105 M125,100 L118,115" stroke="#ffe600" stroke-width="3" />
+                              <path d="M195,100 L205,90 M195,100 L210,105 M195,100 L202,115" stroke="#ffe600" stroke-width="3" />
+                            </g>
+
+                            <!-- Legs -->
+                            <rect x="140" y="220" width="14" height="18" fill="#124898" rx="2"/>
+                            <rect x="166" y="220" width="14" height="18" fill="#124898" rx="2"/>
+                            <rect x="130" y="234" width="28" height="12" fill="#111" rx="5"/>
+                            <rect x="162" y="234" width="28" height="12" fill="#111" rx="5"/>
+                            
+                            <!-- Body (Yellow pill) -->
+                            <rect x="130" y="110" width="60" height="115" fill="url(#banana)" rx="30"/>
+                            
+                            <!-- Overalls Skirt -->
+                            <path d="M130,180 L190,180 L190,210 C190,218 178,222 160,222 C142,222 130,218 130,210 Z" fill="url(#denim)"/>
+                            <rect x="145" y="165" width="30" height="20" fill="url(#denim)" rx="3"/>
+                            <!-- Straps -->
+                            <path d="M130,165 L148,180 L142,184 L130,170 Z" fill="#0c3570"/>
+                            <path d="M190,165 L172,180 L178,184 L190,170 Z" fill="#0c3570"/>
+                            <!-- Overalls Buttons -->
+                            <circle cx="146" cy="181" r="2.5" fill="#111"/>
+                            <circle cx="174" cy="181" r="2.5" fill="#111"/>
+                            
+                            <!-- Goggles & Eyelashes -->
+                            <rect x="128" y="135" width="64" height="12" fill="#222" rx="3"/>
+                            <!-- Eyelashes -->
+                            <path d="M142,135 L138,128 M150,133 L149,125 M170,133 L171,125 M178,135 L182,128" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="148" cy="140" r="13" fill="#888" stroke="#555" stroke-width="1.5"/>
+                            <circle cx="172" cy="140" r="13" fill="#888" stroke="#555" stroke-width="1.5"/>
+                            <circle cx="148" cy="140" r="10" fill="#fff"/>
+                            <circle cx="172" cy="140" r="10" fill="#fff"/>
+                            <!-- Pupils -->
+                            <circle cx="148" cy="140" r="4.5" fill="#663300"/>
+                            <circle cx="172" cy="140" r="4.5" fill="#663300"/>
+                            <circle cx="148" cy="140" r="1.5" fill="#000"/>
+                            <circle cx="172" cy="140" r="1.5" fill="#000"/>
+                            <circle cx="149.5" cy="138.5" r="2" fill="#fff"/>
+                            <circle cx="173.5" cy="138.5" r="2" fill="#fff"/>
+                            
+                            <!-- Mouth -->
+                            <path class="mouth-chew-mayur" d="M148,162 Q160,172 172,162" fill="none" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+                            
+                            <!-- Arm holding Chocolate -->
+                            <g class="arm-eat-mayur">
+                              <path d="M128,185 Q110,195 125,200" fill="none" stroke="url(#banana)" stroke-width="11" stroke-linecap="round"/>
+                              <!-- Chocolate Bar -->
+                              <g transform="translate(108, 185) rotate(-15)">
+                                <rect x="0" y="8" width="14" height="15" fill="#ccc" rx="1"/>
+                                <path d="M0,8 L4,4 L8,8 L12,4 L14,8 Z" fill="#ff4757"/>
+                                <rect x="0" y="12" width="14" height="12" fill="#ff4757"/>
+                                <rect x="2" y="0" width="10" height="9" fill="url(#choc)" rx="1"/>
+                                <line x1="5" y1="0" x2="5" y2="9" stroke="#2c1a0c" stroke-width="1"/>
+                                <line x1="8" y1="0" x2="8" y2="9" stroke="#2c1a0c" stroke-width="1"/>
+                              </g>
+                            </g>
+                            
+                            <!-- Cap (Labeled "Mayur") -->
+                            <path d="M128,112 C128,90 192,90 192,112 Z" fill="#ff758c"/>
+                            <path d="M120,112 L130,105 L180,105 L190,112 Z" fill="#111"/>
+                            <rect x="140" y="100" width="40" height="11" fill="#fff" rx="2"/>
+                            <text x="160" y="109" font-family="sans-serif" font-size="8px" font-weight="bold" fill="#111" text-anchor="middle">Mayur</text>
+                          </g>
+                          
+                          <!-- Minion 2: Vish (Boy - Right side, eating pizza, wearing glasses) -->
+                          <g class="minion minion-boy">
+                            <!-- Legs -->
+                            <rect x="320" y="220" width="14" height="18" fill="#124898" rx="2"/>
+                            <rect x="346" y="220" width="14" height="18" fill="#124898" rx="2"/>
+                            <rect x="310" y="234" width="28" height="12" fill="#111" rx="5"/>
+                            <rect x="342" y="234" width="28" height="12" fill="#111" rx="5"/>
+                            
+                            <!-- Body -->
+                            <rect x="310" y="110" width="60" height="115" fill="url(#banana)" rx="30"/>
+                            
+                            <!-- Overalls Pants -->
+                            <path d="M310,180 L370,180 L370,210 C370,218 358,222 350,222 C342,222 330,218 310,210 Z" fill="url(#denim)"/>
+                            <rect x="325" y="165" width="30" height="20" fill="url(#denim)" rx="3"/>
+                            <!-- Straps -->
+                            <path d="M310,165 L328,180 L322,184 L310,170 Z" fill="#0c3570"/>
+                            <path d="M370,165 L352,180 L358,184 L370,170 Z" fill="#0c3570"/>
+                            <!-- Overalls Buttons -->
+                            <circle cx="326" cy="181" r="2.5" fill="#111"/>
+                            <circle cx="354" cy="181" r="2.5" fill="#111"/>
+                            
+                            <!-- Goggles / Spectacles Bridge -->
+                            <rect x="308" y="135" width="64" height="12" fill="#222" rx="3"/>
+                            <circle cx="328" cy="140" r="14" fill="none" stroke="#ffd700" stroke-width="2.5"/>
+                            <circle cx="352" cy="140" r="14" fill="none" stroke="#ffd700" stroke-width="2.5"/>
+                            <line x1="340" y1="137" x2="340" y2="143" stroke="#ffd700" stroke-width="2"/>
+                            <circle cx="328" cy="140" r="11" fill="#fff"/>
+                            <circle cx="352" cy="140" r="11" fill="#fff"/>
+                            <!-- Pupils -->
+                            <circle cx="328" cy="140" r="4.5" fill="#663300"/>
+                            <circle cx="352" cy="140" r="4.5" fill="#663300"/>
+                            <circle cx="328" cy="140" r="1.5" fill="#000"/>
+                            <circle cx="352" cy="140" r="1.5" fill="#000"/>
+                            <circle cx="329.5" cy="138.5" r="2" fill="#fff"/>
+                            <circle cx="353.5" cy="138.5" r="2" fill="#fff"/>
+                            
+                            <!-- Mouth -->
+                            <path class="mouth-chew-vish" d="M328,162 Q340,172 352,162" fill="none" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+                            
+                            <!-- Arm holding Pizza -->
+                            <g class="arm-eat-vish">
+                              <path d="M372,185 Q390,195 375,200" fill="none" stroke="url(#banana)" stroke-width="11" stroke-linecap="round"/>
+                              <!-- Pizza Slice -->
+                              <g transform="translate(365, 182) rotate(15)">
+                                <path d="M0,15 L22,0 L12,28 Z" fill="#ffd000" stroke="#f0a500" stroke-width="1"/>
+                                <path d="M22,0 Q24,14 12,28" stroke="#a0522d" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                                <circle cx="8" cy="12" r="2" fill="#d63031"/>
+                                <circle cx="14" cy="18" r="1.5" fill="#d63031"/>
+                              </g>
+                            </g>
+                            
+                            <!-- Cap (Labeled "Vish") -->
+                            <path d="M308,112 C308,90 372,90 372,112 Z" fill="#111"/>
+                            <path d="M300,112 L310,105 L360,105 L370,112 Z" fill="#ffd700"/>
+                            <rect x="320" y="100" width="40" height="11" fill="#fff" rx="2"/>
+                            <text x="340" y="109" font-family="sans-serif" font-size="8px" font-weight="bold" fill="#111" text-anchor="middle">Vish</text>
+                          </g>
+                          
+                          <!-- Picnic blanket -->
+                          <ellipse cx="250" cy="245" rx="70" ry="12" fill="rgba(0,0,0,0.15)" />
+                          <rect x="220" y="238" width="60" height="8" fill="#e63956" rx="2" opacity="0.8"/>
+                          
+                          <!-- Floating items & hearts -->
+                          <g class="floating-sweets">
+                            <g class="candy-float-1">
+                              <rect x="210" y="110" width="12" height="7" fill="#5c3a21" rx="1.5"/>
+                              <path d="M210,113.5 L206,110 L206,117 Z M222,113.5 L226,110 L226,117 Z" fill="#ff758c"/>
+                            </g>
+                            <g class="pizza-float-2">
+                              <path d="M270,120 L282,110 L277,128 Z" fill="#ffd000"/>
+                            </g>
+                          </g>
+
+                          <!-- Floating hearts/stars -->
+                          <g class="floating-hearts">
+                            <path class="heart-1" d="M245,145 C245,145 247,140 250,140 C253,140 255,142 255,145 C255,148 248,153 245,155 C242,153 235,148 235,145 C235,142 237,140 240,140 C243,140 245,145 245,145 Z" fill="#ff758c" opacity="0.75"/>
+                            <path class="heart-2" d="M265,155 C265,155 267,150 270,150 C273,150 275,152 275,155 C275,158 268,163 265,165 C262,163 255,158 255,155 C255,152 257,150 260,150 C263,150 265,155 265,155 Z" fill="#ffd700" opacity="0.6"/>
+                          </g>
+                        </svg>
+                    </div>
+                    <p class="minions-status font-hand text-gold text-lg">Mayu & Vish waiting for the stars to align... 💖</p>
+                </div>
+            </div>
+            
+            <!-- Right Side: Controls Panel (Title, Timer, Guidelines, Passcode) -->
+            <div class="gate-right-panel">
+                <h1 id="clock-title" class="clock-title font-serif gold-pulse-text">V I S H W A</h1>
+                <p class="clock-subtitle font-sans text-xs uppercase tracking-widest text-muted">Her Cosmic Clock</p>
+
+                <!-- State 1: Countdown Panel -->
+                <div id="gate-countdown-panel" class="gate-countdown-panel">
+                    <div class="countdown-timer-grid my-6">
+                        <div class="timer-box"><span id="gate-timer-days">00</span><p class="text-xs uppercase">Days</p></div>
+                        <div class="timer-box"><span id="gate-timer-hours">00</span><p class="text-xs uppercase">Hrs</p></div>
+                        <div class="timer-box"><span id="gate-timer-minutes">00</span><p class="text-xs uppercase">Mins</p></div>
+                        <div class="timer-box"><span id="gate-timer-seconds">00</span><p class="text-xs uppercase">Secs</p></div>
+                    </div>
+
+                    <!-- Glassmorphic Instructions Banner -->
+                    <div class="instructions-banner data-card text-left">
+                        <h4 class="font-serif text-rose mb-3 uppercase tracking-wider text-xs text-center">Journey Guidelines</h4>
+                        <div class="instruction-row"><span class="icon">💻</span><p>Please view on a **laptop or big screen** for the best experience.</p></div>
+                        <div class="instruction-row mt-3"><span class="icon">🎧</span><p>**Strictly earbuds or headphones on** for background score.</p></div>
+                        <div class="instruction-row mt-3"><span class="icon">🔒</span><p>Find a quiet corner, **take your time, and see alone**.</p></div>
+                    </div>
+                </div>
+
+                <!-- State 2: Password Lock Panel -->
+                <div id="gate-lock-panel" class="gate-lock-panel hidden">
+                    <div class="lock-card data-card">
+                        <h3 class="font-serif text-gold text-lg mb-2">Universe Protected</h3>
+                        <p class="text-xs text-muted leading-relaxed">The stars have completed their alignment. Enter the secret key to unlock her birthday universe:</p>
+                        
+                        <div class="passcode-input-wrapper mt-6">
+                            <input id="gate-passcode-field" type="password" maxlength="12" class="gate-passcode-field" placeholder="••••" autocomplete="off">
+                            <button id="btn-submit-passcode" class="btn btn-submit-passcode">🔑</button>
+                        </div>
+                        <p id="gate-validation-error" class="gate-validation-error mt-3"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Universe Loader Screen -->
+    <div id="loader" class="loader-overlay">
+        <div class="loader-content">
+            <div class="loader-constellation">
+                <svg id="constellation-svg" viewBox="0 0 100 100" width="120" height="120">
+                    <circle cx="50" cy="15" r="2" class="loader-star star-1" />
+                    <circle cx="85" cy="40" r="2" class="loader-star star-2" />
+                    <circle cx="70" cy="80" r="2" class="loader-star star-3" />
+                    <circle cx="30" cy="80" r="2" class="loader-star star-4" />
+                    <circle cx="15" cy="40" r="2" class="loader-star star-5" />
+                    
+                    <line x1="50" y1="15" x2="85" y2="40" class="loader-line line-1" />
+                    <line x1="85" y1="40" x2="70" y2="80" class="loader-line line-2" />
+                    <line x1="70" y1="80" x2="30" y2="80" class="loader-line line-3" />
+                    <line x1="30" y1="80" x2="15" y2="40" class="loader-line line-4" />
+                    <line x1="15" y1="40" x2="50" y2="15" class="loader-line line-5" />
+                </svg>
+            </div>
+            <div class="loader-text-container">
+                <p id="loader-phrase" class="loader-phrase">Preparing a universe for Vish...</p>
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                <p class="loader-percentage"><span id="loader-percentage-num">0</span>%</p>
+            </div>
+            <button id="btn-enter-universe" class="btn btn-premium hidden magnetic" aria-label="Enter Her Universe">
+                <span class="btn-text">Enter Her Universe</span>
+                <span class="btn-glow"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chapter Zero Content -->
+    <main id="chapter-zero" class="chapter-zero-container hidden">
+        
+        <!-- Center Text Choreography -->
+        <div class="story-teller">
+            <!-- Pulsing Date -->
+            <div id="zero-date" class="zero-date text-center hidden">18 . 07</div>
+            
+            <!-- Narrations -->
+            <div id="narrative-1" class="narrative-text hidden">Some birthdays celebrate the day someone was born.</div>
+            <div id="narrative-2" class="narrative-text hidden">But some birthdays make you wonder...</div>
+            <div id="narrative-3" class="narrative-text text-large italic hidden">What did the universe know that day...<br>that the rest of us hadn't discovered yet?</div>
+        </div>
+
+        <!-- The Falling Petal Overlay -->
+        <div id="single-petal-container" class="single-petal-container hidden">
+            <svg id="falling-petal" class="falling-petal-svg" viewBox="0 0 100 100">
+                <path d="M50,10 C65,30 85,55 50,90 C15,55 35,30 50,10 Z" fill="url(#rose-gradient)" />
+                <defs>
+                    <linearGradient id="rose-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ff758c" />
+                        <stop offset="100%" stop-color="#ff7eb3" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Hero Title Section -->
+        <div id="hero-reveal" class="hero-reveal-container hidden">
+            <h1 id="hero-title" class="hero-title-name">VISH</h1>
+            <p id="hero-subtitle" class="hero-subtitle-tagline">
+                The wish I never knew I had made...<br>
+                <span class="subtitle-highlight">but thank God for fulfilling every single day.</span>
+            </p>
+            
+            <button id="btn-explore-universe" class="btn btn-magnetic-explore" aria-label="Explore Her Universe">
+                <span class="btn-explore-inner">Explore Her Universe</span>
+                <div class="explore-glow"></div>
+            </button>
+        </div>
+
+        <!-- Faint Volume Tip -->
+        <div class="audio-hint-indicator">
+            <span class="music-icon">🎵</span> Recommended with sound on
+        </div>
+
+    </main>
+
+    <!-- Transition Wipe -->
+    <div id="transition-wipe" class="transition-wipe"></div>
+
+    <!-- Scripts -->
+    <script src="./js/main.js"></script>
+    <script src="./js/cursor.js"></script>
+    <script src="./js/stars.js"></script>
+    <script src="./js/audio.js"></script>
+    <script src="./js/loader.js"></script>
+
+</body>
+</html>

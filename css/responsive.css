@@ -1,0 +1,169 @@
+/**
+ * VISH — THE WISH GOD FULFILLED
+ * Responsive Adaptability & Grid Systems
+ */
+
+/* ==========================================================================
+   Fluid Typography Configuration
+   ========================================================================== */
+h1 {
+    font-size: clamp(3rem, 9.5vw, 7.5rem);
+}
+
+h2 {
+    font-size: clamp(2rem, 5.5vw, 4.2rem);
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+p {
+    font-size: clamp(0.95rem, 1.25vw, 1.2rem);
+}
+
+/* ==========================================================================
+   Media Query Breakpoints
+   ========================================================================== */
+
+/* Laptops & Tablets (1024px and below) */
+@media (max-width: 1024px) {
+    .hero-title-name {
+        letter-spacing: 8px;
+    }
+    
+    .story-card-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile Portrait Mode (768px and below) */
+@media (max-width: 768px) {
+    /* Base resets for mobile */
+    body {
+        font-size: 15px;
+    }
+
+    /* Chapter Zero spacing overrides */
+    .zero-date {
+        font-size: 2.2rem;
+        letter-spacing: 6px;
+    }
+
+    .narrative-text {
+        font-size: 1.15rem;
+        line-height: 1.6;
+    }
+
+    .text-large {
+        font-size: 1.5rem;
+    }
+
+    .hero-title-name {
+        font-size: 4.5rem;
+        letter-spacing: 6px;
+    }
+
+    .hero-subtitle-tagline {
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .btn-magnetic-explore {
+        padding: 0.95rem 2.2rem;
+        font-size: 0.85rem;
+    }
+
+    /* Floating elements alignment */
+    .audio-widget-container {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 52px;
+        height: 52px;
+    }
+    
+    .audio-widget-container.muted::after {
+        width: 24px;
+    }
+
+    /* Classroom bench adjustments */
+    .classroom-benches-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .bench-card {
+        width: 100% !important;
+        margin: 0.5rem 0 !important;
+    }
+
+    /* Floating words orbit spacing */
+    .orbit-word {
+        position: relative !important;
+        transform: none !important;
+        left: auto !important;
+        top: auto !important;
+        margin: 0.5rem;
+        display: inline-block;
+    }
+    
+    .orbit-container {
+        height: auto !important;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    /* Google search inputs */
+    .search-engine-box {
+        width: 95% !important;
+        padding: 0.85rem !important;
+    }
+
+    .search-chips-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Prescription card layouts */
+    .prescription-card {
+        padding: 1.5rem !important;
+    }
+    
+    /* 18 Gifts Constellation adaptations */
+    .gift-constellation-map {
+        width: 320px !important;
+        height: 320px !important;
+        margin: 0 auto;
+    }
+    
+    .gift-star {
+        transform: scale(0.85);
+    }
+    
+    /* Dialog boxes */
+    .letter-card {
+        width: 95% !important;
+        max-height: 90vh;
+        padding: 2rem 1.5rem !important;
+    }
+
+    /* Hide desktop-only styles */
+    .desktop-only {
+        display: none !important;
+    }
+}
+
+/* Small Viewports (480px and below) */
+@media (max-width: 480px) {
+    .hero-title-name {
+        font-size: 3.8rem;
+    }
+
+    .result-title {
+        font-size: 1.25rem !important;
+    }
+}

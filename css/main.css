@@ -1,0 +1,2158 @@
+/**
+ * VISH — THE WISH GOD FULFILLED
+ * Base CSS Styles & Unified Theme Variables
+ */
+
+/* ==========================================================================
+   Base Colors and Themes Configuration
+   ========================================================================== */
+:root {
+    /* Fonts */
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-hand: 'Caveat', cursive;
+
+    /* Base Colors (Landing Screen / Default Dark) */
+    --color-bg: #0a0a0f;
+    --color-text: #fdfdfd;
+    --color-text-muted: #a0a0b0;
+    --color-gold: #ffd700;
+    --color-gold-glow: rgba(255, 215, 0, 0.4);
+    --color-rose: #ff758c;
+    --color-rose-glow: rgba(255, 117, 140, 0.4);
+    --color-accent: #ff7eb3;
+    
+    /* Cursor properties */
+    --cursor-dot-size: 8px;
+    --cursor-ring-size: 30px;
+}
+
+/* Theme Color Morphs (Scroll triggered classes) */
+body.childhood-theme {
+    --color-bg: #FAF7F0;
+    --color-text: #1a1a1a;
+    --color-text-muted: #4e4e4e;
+    --color-rose: #d64a60;
+    --color-gold: #c29500;
+    --color-gold-glow: rgba(194, 149, 0, 0.25);
+}
+
+body.star-theme {
+    --color-bg: #080c18;
+    --color-text: #f5f7fa;
+    --color-text-muted: #8d98b0;
+    --color-rose: #ff758c;
+    --color-gold: #ffbe0b;
+    --color-gold-glow: rgba(255, 190, 11, 0.3);
+}
+
+body.hostel-theme {
+    --color-bg: #050814;
+    --color-text: #eef2f7;
+    --color-text-muted: #8490a6;
+    --color-rose: #ff85a2;
+    --color-gold: #ffd700;
+}
+
+body.vish-theme {
+    --color-bg: #FFF4F4;
+    --color-text: #261b1b;
+    --color-text-muted: #544444;
+    --color-rose: #e63956;
+    --color-gold: #b38600;
+    --color-gold-glow: rgba(179, 134, 0, 0.25);
+}
+
+body.achievement-theme {
+    --color-bg: #040810;
+    --color-text: #f0f4f8;
+    --color-text-muted: #7d8b9e;
+    --color-rose: #ff6b8b;
+    --color-gold: #ffd700;
+    --color-gold-glow: rgba(255, 215, 0, 0.5);
+}
+
+body.birthday-theme {
+    --color-bg: #08020b;
+    --color-text: #fdfafc;
+    --color-text-muted: #a595ab;
+    --color-rose: #ff477e;
+    --color-gold: #ffd700;
+    --color-gold-glow: rgba(255, 215, 0, 0.6);
+}
+
+/* Base resets */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1), color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Luminous Custom Cursor
+   ========================================================================== */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.cursor-dot {
+    position: absolute;
+    width: var(--cursor-dot-size);
+    height: var(--cursor-dot-size);
+    background-color: var(--color-rose);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--color-rose);
+    transition: width 0.2s, height 0.2s, background-color 0.3s;
+}
+
+.cursor-ring {
+    position: absolute;
+    width: var(--cursor-ring-size);
+    height: var(--cursor-ring-size);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(0, 0); /* Positioned via JS offset */
+    pointer-events: none;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s;
+}
+
+.cursor-label {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--color-gold);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.custom-cursor.has-label .cursor-label {
+    opacity: 1;
+}
+
+.custom-cursor.has-label .cursor-ring {
+    border-color: var(--color-gold);
+}
+
+/* ==========================================================================
+   Full-screen Canvases
+   ========================================================================== */
+.background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: auto;
+}
+
+.foreground-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Cinematic Loader Elements
+   ========================================================================== */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #050508;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-content {
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loader-constellation {
+    margin-bottom: 2rem;
+}
+
+.loader-star {
+    fill: #fff;
+    filter: drop-shadow(0 0 4px #ffd700);
+}
+
+.loader-line {
+    stroke: rgba(255, 215, 0, 0.15);
+    stroke-width: 1;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: dashLine 4s forwards infinite;
+}
+
+@keyframes dashLine {
+    to {
+        stroke-dashoffset: 0;
+        stroke: rgba(255, 215, 0, 0.6);
+    }
+}
+
+.loader-phrase {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    min-height: 1.8rem;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-rose), var(--color-gold));
+    box-shadow: 0 0 10px var(--color-rose);
+    transition: width 0.1s linear;
+}
+
+.progress-bar.active-glow {
+    box-shadow: 0 0 15px var(--color-gold);
+}
+
+.loader-percentage {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    letter-spacing: 2px;
+}
+
+/* ==========================================================================
+   Premium Buttons
+   ========================================================================== */
+.btn {
+    background: transparent;
+    border: none;
+    padding: 0.85rem 2.2rem;
+    color: #fff;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    outline: none;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.btn-premium {
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    background: rgba(10, 10, 15, 0.7);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.btn-premium:hover {
+    box-shadow: 0 0 15px var(--color-gold-glow);
+    border-color: var(--color-gold);
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-gold);
+    filter: blur(40px);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.15;
+    transition: transform 0.5s;
+    z-index: 1;
+}
+
+.btn-premium:hover .btn-glow {
+    transform: translate(-50%, -50%) scale(2);
+}
+
+.hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   Chapter Zero Layout (index.html)
+   ========================================================================== */
+.landing-body {
+    background-color: #040407;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.chapter-zero-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.story-teller {
+    text-align: center;
+    max-width: 600px;
+    padding: 2rem;
+}
+
+.zero-date {
+    font-family: var(--font-sans);
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 12px;
+    color: var(--color-text);
+}
+
+.narrative-text {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text);
+}
+
+.text-large {
+    font-size: 2rem;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.single-petal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.falling-petal-svg {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+/* Hero title structure */
+.hero-reveal-container {
+    text-align: center;
+    max-width: 750px;
+    padding: 2rem;
+    position: relative;
+    z-index: 3;
+}
+
+.hero-title-name {
+    font-family: var(--font-serif);
+    font-size: 8rem;
+    font-weight: 300;
+    letter-spacing: 15px;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 30%, var(--color-rose) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle-tagline {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+}
+
+.subtitle-highlight {
+    color: var(--color-text);
+    font-style: italic;
+}
+
+.btn-magnetic-explore {
+    background: linear-gradient(135deg, var(--color-rose), #ff477e);
+    border: none;
+    padding: 1.1rem 3rem;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 10px 30px rgba(255, 117, 140, 0.35);
+    transition: transform 0.1s, box-shadow 0.3s;
+    outline: none;
+}
+
+.btn-magnetic-explore:hover {
+    box-shadow: 0 15px 35px rgba(255, 117, 140, 0.5);
+}
+
+.audio-hint-indicator {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Transition Screen Swipe
+   ========================================================================== */
+.transition-wipe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #08020b; /* birthday theme start color */
+    clip-path: circle(0% at 50% 50%);
+    z-index: 10000;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Floating Audio Widget
+   ========================================================================== */
+.audio-widget-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 900;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.audio-widget-container:hover {
+    transform: scale(1.05);
+    border-color: var(--color-rose);
+}
+
+.audio-icon-element {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.speaker-base {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-text);
+    top: 6px;
+    left: 2px;
+}
+
+.speaker-cone {
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 12px solid var(--color-text);
+    top: 4px;
+    left: 6px;
+}
+
+.wave-arcs {
+    position: absolute;
+    left: 16px;
+    top: 2px;
+    width: 10px;
+    height: 20px;
+    border-right: 2px solid var(--color-rose);
+    border-radius: 50%;
+    transition: opacity 0.3s;
+}
+
+.audio-widget-container.muted .wave-arcs {
+    opacity: 0;
+}
+
+.audio-widget-container.muted::after {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 2px;
+    background-color: #ff3366;
+    transform: rotate(45deg);
+}
+
+/* Mini Canvas for music tracking inside widget container */
+.audio-visualizer-mini {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    opacity: 0.45;
+}
+
+/* ==========================================================================
+   Story Page Layout & Base Chapter Wrappers
+   ========================================================================== */
+.story-body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    overflow-y: auto;
+}
+
+.story-chapter {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.chapter-content-wrapper {
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.chapter-badge {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-rose);
+    display: block;
+    margin-bottom: 0.85rem;
+}
+
+.chapter-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.chapter-body p {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-12 { margin-top: 3rem; }
+.my-8 { margin-top: 2rem; margin-bottom: 2rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-gold { color: var(--color-gold); }
+.text-rose { color: var(--color-rose); }
+.text-muted { color: var(--color-text-muted); }
+.font-sans { font-family: var(--font-sans); }
+.font-serif { font-family: var(--font-serif); }
+.font-hand { font-family: var(--font-hand); }
+.text-bold { font-weight: 700; }
+.border-b { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.pb-3 { padding-bottom: 0.75rem; }
+.pl-4 { padding-left: 1rem; }
+.pl-6 { padding-left: 1.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+
+.text-highlight {
+    color: var(--color-rose);
+    border-bottom: 1px dashed var(--color-rose);
+}
+
+/* ==========================================================================
+   Premium Glassmorphism Data Cards
+   ========================================================================== */
+.data-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.data-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* Light theme overrides for data cards */
+.childhood-theme .data-card,
+.vish-theme .data-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    color: var(--color-text);
+}
+
+.childhood-theme .data-card:hover,
+.vish-theme .data-card:hover {
+    border-color: var(--color-rose);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================================================================
+   Chapter Specific Custom Layout Elements
+   ========================================================================== */
+
+/* Chapter 1: Classroom Benches */
+.classroom-benches-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.bench-card {
+    width: 48%;
+}
+
+.notebook-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+/* Chapter 2: Diverging Roads */
+.diverging-roads-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.glowing-silhouette {
+    position: absolute;
+    font-size: 2rem;
+    top: 5px;
+    z-index: 5;
+    filter: drop-shadow(0 0 10px var(--color-text));
+}
+
+.glowing-silhouette.boy {
+    left: 200px;
+    transform: translateX(-50%);
+}
+
+.glowing-silhouette.girl {
+    left: 200px;
+    transform: translateX(-50%);
+}
+
+.road-glow-line {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: dashRoad 4s linear infinite;
+}
+
+@keyframes dashRoad {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Chapter 3: Stars constellation connect box */
+.constellation-interaction-box {
+    background: rgba(10, 15, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+}
+
+.star-interactive-canvas-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.constellation-complete-message {
+    z-index: 10;
+    pointer-events: none;
+    text-shadow: 0 0 10px var(--color-gold);
+    transition: opacity 0.5s;
+}
+
+.constellation-complete-message h3 {
+    font-size: 2.5rem;
+    letter-spacing: 8px;
+}
+
+/* Chapter 4: Silence chat bubbles */
+.fading-chat-bubble {
+    max-width: 250px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 1rem;
+    color: var(--color-text-muted);
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.chat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-text-muted);
+    margin-right: 0.5rem;
+}
+
+/* Chapter 5: Summer Chats */
+.mock-chat-container {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-bubble {
+    max-width: 80%;
+    padding: 0.85rem 1.15rem;
+    border-radius: 18px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.chat-bubble.received {
+    align-self: flex-start;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text);
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chat-bubble.sent {
+    align-self: flex-end;
+    background-color: var(--color-rose);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 15px rgba(255, 117, 140, 0.3);
+}
+
+.chat-time {
+    display: block;
+    font-size: 0.65rem;
+    opacity: 0.5;
+    margin-top: 0.35rem;
+    text-align: right;
+}
+
+/* Chapter 6: Hostel Window */
+.hostel-window-container {
+    max-width: 280px;
+    height: 350px;
+    border: 10px solid #1a1a24;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.window-pane {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(8, 12, 28, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.rain-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+    opacity: 0.3;
+}
+
+.room-glowing-light {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-color: #ffd700;
+    filter: blur(50px);
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    opacity: 0.15;
+}
+
+.phone-glow-overlay {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(255, 117, 140, 0.25);
+    text-align: center;
+}
+
+.notification-sparkle {
+    font-size: 0.75rem;
+    display: inline-block;
+}
+
+/* Chapter 7: Name dissolve */
+.name-dissolve-container {
+    display: inline-block;
+}
+
+.text-vishwa {
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    letter-spacing: 10px;
+    color: #fff;
+    display: inline-block;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.text-wa {
+    display: inline-block;
+    color: rgba(255,255,255,0.3);
+}
+
+.text-wish-reflection {
+    font-family: var(--font-serif);
+    font-size: 3.2rem;
+    font-style: italic;
+    color: var(--color-gold);
+    opacity: 0;
+    letter-spacing: 12px;
+    text-shadow: 0 0 8px var(--color-gold-glow);
+    transform: scaleY(-0.85); /* Mirror reflection effect */
+    display: block;
+    margin-top: 0.5rem;
+    pointer-events: none;
+}
+
+/* Light theme overrides for Chapter 7 */
+.vish-theme .text-vishwa {
+    color: var(--color-rose);
+    text-shadow: 0 4px 15px rgba(230, 57, 86, 0.15);
+}
+
+.vish-theme .text-wa {
+    color: rgba(38, 27, 27, 0.25);
+}
+
+/* Chapter 8: One word floats */
+.orbit-container {
+    position: relative;
+    height: 380px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orbit-word {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.word-badge {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.word-badge:hover {
+    background: rgba(255, 117, 140, 0.1);
+    border-color: var(--color-rose);
+}
+
+/* Light theme overrides for Chapter 8 floating word badges */
+.vish-theme .word-badge,
+.childhood-theme .word-badge {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: var(--color-text);
+}
+
+.vish-theme .word-badge:hover,
+.childhood-theme .word-badge:hover {
+    background: rgba(230, 57, 86, 0.08);
+    border-color: var(--color-rose);
+}
+
+/* Chapter 9: Doctor prescription */
+.prescription-card {
+    max-width: 450px;
+    background-color: #fcfbfa;
+    border: 1px solid #e8e2d5;
+    box-shadow: 0 15px 35px rgba(30, 20, 10, 0.08);
+    color: #2c221e;
+    text-align: left;
+}
+
+.prescription-card:hover {
+    border-color: #d2c5ae;
+}
+
+.prescription-list li {
+    margin-top: 0.35rem;
+}
+
+/* Chapter 10: Storm Weather */
+.storm-canvas-box {
+    width: 100%;
+    max-width: 480px;
+    height: 200px;
+    background: linear-gradient(180deg, #070912 0%, #020306 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: block;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Chapter 12: Universe Search Box */
+.search-engine-box {
+    max-width: 500px;
+    background: rgba(10, 10, 15, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.search-engine-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 0.75rem;
+}
+
+.search-dot-btn {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+}
+
+.search-dot-btn.red { background-color: #ff5f56; }
+.search-dot-btn.yellow { background-color: #ffbd2e; }
+.search-dot-btn.green { background-color: #27c93f; }
+
+.search-engine-title {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-left: 0.5rem;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.search-input {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 30px;
+    padding: 0.75rem 1.5rem;
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.search-button-icon {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+}
+
+.search-chips-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-chip {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.search-chip.active {
+    background: rgba(255, 117, 140, 0.1);
+    color: var(--color-rose);
+    border-color: var(--color-rose-glow);
+}
+
+.search-results-output {
+    min-height: 80px;
+}
+
+.result-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.result-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.result-title {
+    font-size: 1.35rem;
+    font-weight: 300;
+    margin-top: 0.35rem;
+}
+
+.result-name {
+    font-size: 2.2rem;
+    font-weight: 300;
+}
+
+.result-did-you-mean {
+    color: var(--color-text-muted);
+}
+
+.did-you-mean-link {
+    color: var(--color-gold);
+    text-shadow: 0 0 5px var(--color-gold-glow);
+}
+
+/* Chapter 13: AIR 497 */
+.rank-display-box {
+    display: inline-block;
+}
+
+.rank-number {
+    font-size: 8rem;
+    font-weight: 300;
+    color: var(--color-gold);
+}
+
+/* Chapter 14: Meaning of Vishwa */
+.galaxy-canvas-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.nebula-glow-orb {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255, 117, 140, 0.3), transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(20px);
+}
+
+.galaxy-stars-spiral {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='1' fill='%23fff' opacity='.6'/%3E%3Ccircle cx='40' cy='30' r='1.5' fill='%23ffd700' opacity='.8'/%3E%3Ccircle cx='70' cy='60' r='0.8' fill='%23fff'/%3E%3Cpath d='M50,50 Q60,30 80,40 M50,50 Q40,70 20,60' stroke='rgba(255,255,255,0.05)' fill='none'/%3E%3C/svg%3E");
+    background-size: cover;
+    animation: spin 30s linear infinite;
+}
+
+/* Chapter 15: Song Vinyl Record */
+.vinyl-record-player {
+    position: relative;
+    width: 240px;
+    height: 240px;
+}
+
+.vinyl-disc {
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle, transparent 35%, rgba(0, 0, 0, 0.3) 35.5%, transparent 36%),
+        radial-gradient(circle, transparent 45%, rgba(0, 0, 0, 0.3) 45.5%, transparent 46%),
+        radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.3) 55.5%, transparent 56%),
+        radial-gradient(circle, transparent 65%, rgba(0, 0, 0, 0.3) 65.5%, transparent 66%),
+        radial-gradient(circle, transparent 75%, rgba(0, 0, 0, 0.3) 75.5%, transparent 76%),
+        radial-gradient(circle, transparent 85%, rgba(0, 0, 0, 0.3) 85.5%, transparent 86%),
+        radial-gradient(circle, #333 15%, #050505 40%, #151515 65%, #000 85%);
+    border-radius: 50%;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.45);
+    border: 4px solid #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.vinyl-disc::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.08) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.vinyl-label-center {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #ffd700;
+    z-index: 3;
+}
+
+.label-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.label-sub {
+    font-size: 0.95rem;
+}
+
+.player-arm-needle {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    width: 12px;
+    height: 100px;
+    background: linear-gradient(90deg, #b0b0b0, #505050);
+    transform-origin: 50% 10px;
+    transform: rotate(12deg);
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 5;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.player-arm-needle.playing {
+    transform: rotate(32deg);
+}
+
+/* Chapter 16: Memories Grid */
+.memories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.memory-grid-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+.memory-grid-item:hover {
+    background: rgba(255, 117, 140, 0.06);
+    border-color: var(--color-rose);
+    transform: scale(1.03);
+}
+
+.memory-icon {
+    font-size: 2.2rem;
+    display: block;
+}
+
+.lens-text-left,
+.lens-text-right {
+    font-size: 0.95rem;
+    color: var(--color-gold);
+    display: none;
+    margin-top: 0.5rem;
+}
+
+.lens-text-left.active,
+.lens-text-right.active {
+    display: block;
+}
+
+/* Chapter 17: Rose interactive Canvas */
+.rose-interactive {
+    cursor: crosshair;
+}
+
+.rose-garden-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(10, 5, 8, 0.4);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.hidden-golden-rose {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 1.25rem;
+    opacity: 0.05;
+    z-index: 10;
+    transition: opacity 0.5s;
+}
+
+.hidden-golden-rose:hover {
+    opacity: 0.8;
+}
+
+/* Chapter 18: Birthday Countdown and Star Map */
+.countdown-timer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.timer-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    min-width: 90px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.timer-box span {
+    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--color-rose);
+    display: block;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-box p {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+}
+
+.bypass-link {
+    text-decoration: underline;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.bypass-link:hover {
+    opacity: 1;
+}
+
+.gift-constellation-map {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.gift-star {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: radial-gradient(circle, #fff 20%, rgba(255, 215, 0, 0.2) 60%, transparent 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+
+.gift-star-num {
+    font-size: 0.75rem;
+    color: #111;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.gift-star.unwrapped {
+    background: radial-gradient(circle, var(--color-rose) 20%, rgba(255, 117, 140, 0.3) 60%, transparent 100%);
+    border-color: var(--color-rose);
+    box-shadow: 0 0 12px var(--color-rose-glow);
+}
+
+.gift-star.unwrapped .gift-star-num {
+    color: #fff;
+}
+
+.gift-reveal-card {
+    max-width: 400px;
+    min-height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==========================================================================
+   Envelope Modal Overlay & Final Letter
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(8, 5, 12, 0.95);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.glass-pane {
+    background: rgba(20, 15, 25, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.letter-card {
+    width: 95%;
+    max-width: 650px;
+    padding: 3.5rem 2.5rem;
+    border-radius: 24px;
+    position: relative;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6), inset 0 0 30px rgba(255, 117, 140, 0.05);
+    border: 1px solid rgba(255, 117, 140, 0.25);
+    background: linear-gradient(145deg, rgba(25, 20, 35, 0.95), rgba(15, 10, 20, 0.98));
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.letter-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.letter-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.letter-card::-webkit-scrollbar-thumb {
+    background: rgba(255, 117, 140, 0.3);
+    border-radius: 3px;
+}
+
+.letter-card::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 117, 140, 0.5);
+}
+
+.letter-scroll-indicator {
+    position: sticky;
+    bottom: -3.5rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(15, 10, 20, 0.98) 30%, rgba(15, 10, 20, 0));
+    padding: 3rem 0 1rem 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.letter-scroll-indicator span {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.25rem;
+}
+
+.scroll-chevron {
+    font-size: 1.25rem;
+    color: var(--color-rose);
+    animation: chevronBob 1.5s ease-in-out infinite;
+    text-shadow: 0 0 8px rgba(255, 117, 140, 0.4);
+}
+
+@keyframes chevronBob {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(6px); opacity: 1; }
+}
+
+.letter-salutation {
+    text-align: left;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.letter-paragraphs p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.88);
+    text-indent: 1.5rem;
+    margin-top: 1rem;
+}
+
+.letter-paragraphs p:first-child {
+    margin-top: 0;
+}
+
+.signature {
+    margin-top: 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+    display: block;
+    text-align: right;
+    color: var(--color-rose);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal-btn:hover {
+    color: var(--color-rose);
+}
+
+.letter-rose-illustration {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.letter-content {
+    line-height: 1.8;
+}
+
+.letter-content h3 {
+    font-style: italic;
+}
+
+/* ==========================================================================
+   Toast Notification Widgets
+   ========================================================================== */
+.toast-card {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 15, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    z-index: 10000;
+    pointer-events: none;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.toast-text {
+    color: var(--color-gold);
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Cinematic Story Image Containers
+   ========================================================================== */
+.chapter-image-box {
+    margin: 2rem 0;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s;
+}
+
+.chapter-image-box:hover {
+    border-color: var(--color-rose);
+}
+
+.chapter-featured-image {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.chapter-image-box:hover .chapter-featured-image {
+    transform: scale(1.04);
+}
+
+/* Chapter 15: Music Player */
+.pure-music-player {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(15, 10, 20, 0.55);
+    border: 1px solid rgba(255, 117, 140, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 15px 40px rgba(255, 117, 140, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.02);
+    margin: 2rem auto;
+    position: relative;
+    z-index: 10;
+    transition: box-shadow 0.4s, border-color 0.4s;
+}
+
+.pure-music-player:hover {
+    border-color: rgba(255, 117, 140, 0.45);
+    box-shadow: 0 20px 50px rgba(255, 117, 140, 0.18), inset 0 0 20px rgba(255, 117, 140, 0.05);
+}
+
+/* Light theme overrides for music player */
+.vish-theme .pure-music-player,
+.childhood-theme .pure-music-player {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
+}
+
+.vish-theme .pure-music-player:hover,
+.childhood-theme .pure-music-player:hover {
+    border-color: rgba(230, 57, 86, 0.25);
+    box-shadow: 0 20px 50px rgba(230, 57, 86, 0.08);
+}
+
+.player-visualizer-canvas {
+    width: 100%;
+    height: 40px;
+    display: block;
+    background: transparent;
+}
+
+.player-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.player-btn {
+    background: var(--color-rose);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 12px rgba(255, 117, 140, 0.3);
+}
+
+.player-btn:hover {
+    transform: scale(1.05);
+    background: #ff5f7e;
+}
+
+.player-btn:active {
+    transform: scale(0.95);
+}
+
+.player-progress-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.player-slider, .player-volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    cursor: pointer;
+}
+
+.vish-theme .player-slider, .vish-theme .player-volume-slider,
+.childhood-theme .player-slider, .childhood-theme .player-volume-slider {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.player-slider::-webkit-slider-thumb, .player-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-rose);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.player-slider::-webkit-slider-thumb:hover, .player-volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+.player-time-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.player-volume-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 85px;
+}
+
+.volume-icon {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.player-volume-slider {
+    width: 55px;
+}
+
+/* Chapter 18B: Her Cosmic Alignment */
+.cosmic-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.cosmic-details-panel {
+    flex: 1.3;
+}
+
+.cosmic-map-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cosmic-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: left;
+}
+
+.cosmic-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.4rem;
+}
+
+.vish-theme .cosmic-item,
+.childhood-theme .cosmic-item {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+}
+
+.cosmic-item .label {
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.cosmic-item .val {
+    font-weight: 600;
+}
+
+.constellation-art-wrapper {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    padding: 1.5rem;
+    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
+}
+
+.vish-theme .constellation-art-wrapper {
+    background: rgba(0, 0, 0, 0.01);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.rohini-constellation-svg {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.25));
+}
+
+.cosmic-star {
+    fill: #fff;
+}
+
+.cosmic-star.major-star {
+    fill: var(--color-gold);
+    animation: goldStarPulse 2s infinite ease-in-out;
+}
+
+@keyframes goldStarPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--color-gold)); }
+    50% { transform: scale(1.3); filter: drop-shadow(0 0 8px var(--color-gold)); }
+}
+
+.constellation-line {
+    stroke: rgba(255, 255, 255, 0.15);
+    stroke-width: 1.5;
+}
+
+.vish-theme .constellation-line {
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+.star-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .cosmic-grid {
+        flex-direction: column;
+    }
+}
+
+/* COUNTDOWN & PASSWORD ENTRY GATE OVERLAY SCREEN */
+.timer-gate-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #0e0a16 0%, #050308 100%);
+    z-index: 9998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+}
+
+.timer-gate-split-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3.5rem;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Left visuals panel: Minions inside romantic glowing frame */
+.gate-left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.visual-glass-frame {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 117, 140, 0.15);
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    width: 100%;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), inset 0 0 30px rgba(255, 117, 140, 0.02);
+    backdrop-filter: blur(20px);
+    transition: border-color 0.5s, box-shadow 0.5s;
+}
+
+.visual-glass-frame:hover {
+    border-color: rgba(255, 117, 140, 0.35);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(255, 117, 140, 0.05);
+}
+
+.minions-status {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    opacity: 0.9;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+}
+
+/* Right controls panel */
+.gate-right-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.minions-scene-wrapper {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.minions-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Animations for Minions SVG */
+.minion {
+    transform-origin: bottom center;
+}
+
+.minion-girl {
+    animation: minionBob 3s ease-in-out infinite;
+}
+
+.minion-boy {
+    animation: minionBob 3s ease-in-out infinite alternate;
+    animation-delay: 0.4s;
+}
+
+@keyframes minionBob {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50% { transform: translateY(-8px) scaleY(1.02); }
+}
+
+/* Arm eating animations - move food to mouth */
+.arm-eat-mayur {
+    transform-origin: 130px 185px;
+    animation: eatMayur 3.5s ease-in-out infinite;
+}
+
+@keyframes eatMayur {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    30%, 70% { transform: translate(6px, -18px) rotate(15deg); }
+}
+
+.arm-eat-vish {
+    transform-origin: 370px 185px;
+    animation: eatVish 3.5s ease-in-out infinite;
+    animation-delay: 1.2s;
+}
+
+@keyframes eatVish {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    30%, 70% { transform: translate(-6px, -18px) rotate(-15deg); }
+}
+
+/* Mouth chewing animations */
+.mouth-chew-mayur {
+    transform-origin: 160px 162px;
+    animation: chewing 0.5s ease-in-out infinite;
+}
+
+.mouth-chew-vish {
+    transform-origin: 340px 162px;
+    animation: chewing 0.5s ease-in-out infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes chewing {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.2); }
+}
+
+/* Floating sweets animations */
+.candy-float-1 {
+    transform-origin: center;
+    animation: sweepSweet 5s ease-in-out infinite;
+}
+
+.pizza-float-2 {
+    transform-origin: center;
+    animation: sweepSweet 5s ease-in-out infinite alternate;
+    animation-delay: 1.5s;
+}
+
+@keyframes sweepSweet {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-12px) rotate(15deg); }
+}
+
+.floating-hearts path {
+    transform-origin: center;
+}
+
+.heart-1 {
+    animation: floatHeart 4s ease-in-out infinite;
+}
+
+.heart-2 {
+    animation: floatHeart 4s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+@keyframes floatHeart {
+    0% { transform: translateY(15px) scale(0.8); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-20px) scale(1.2); opacity: 0; }
+}
+
+.clock-title {
+    font-size: 2.8rem;
+    letter-spacing: 12px;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.clock-subtitle {
+    margin-bottom: 2rem;
+}
+
+.gate-countdown-panel, .gate-lock-panel {
+    width: 100%;
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+/* Instructions glass banner */
+.instructions-banner {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.instruction-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.instruction-row .icon {
+    font-size: 1.25rem;
+}
+
+.instruction-row p strong {
+    color: var(--color-rose);
+}
+
+/* Password Gate Panel */
+.lock-card {
+    background: rgba(25, 20, 35, 0.6);
+    border: 1px solid rgba(255, 117, 140, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+.passcode-input-wrapper {
+    position: relative;
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.passcode-input-wrapper:focus-within {
+    border-color: var(--color-rose);
+    box-shadow: 0 0 15px rgba(255, 117, 140, 0.25);
+}
+
+.gate-passcode-field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.3rem;
+    font-family: inherit;
+    text-align: center;
+    letter-spacing: 4px;
+    padding: 0.75rem 1rem;
+}
+
+.btn-submit-passcode {
+    background: var(--color-rose);
+    border: none;
+    outline: none;
+    padding: 0 1rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-submit-passcode:hover {
+    background-color: #ff5f7e;
+}
+
+.btn-submit-passcode:active {
+    transform: scale(0.95);
+}
+
+.gate-validation-error {
+    color: #ff4757;
+    font-size: 0.8rem;
+    min-height: 1.2rem;
+}
+
+/* Shake Animation on passcode error */
+.shake-error {
+    animation: shakeCard 0.5s ease-in-out;
+}
+
+@keyframes shakeCard {
+    0%, 100% { transform: translateX(0); }
+    15%, 45%, 75% { transform: translateX(-8px); }
+    30%, 60%, 90% { transform: translateX(8px); }
+}
+
+@media (max-width: 992px) {
+    .timer-gate-split-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1rem;
+        max-width: 550px;
+    }
+    .visual-glass-frame {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .clock-title {
+        font-size: 2.2rem;
+    }
+}
+
+
