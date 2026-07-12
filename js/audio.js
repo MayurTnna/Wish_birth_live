@@ -28,8 +28,12 @@ class AudioManagerClass {
         if (this.ctx) return;
         
         // Setup Web Audio Context
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.ctx = new AudioContext();
+        if (window.Howler && window.Howler.ctx) {
+            this.ctx = window.Howler.ctx;
+        } else {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            this.ctx = new AudioContext();
+        }
         
         // Setup Analyser for visualization
         this.analyser = this.ctx.createAnalyser();

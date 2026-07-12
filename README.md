@@ -1,4 +1,4 @@
-# VISH — THE WISH GOD FULFILLED
+# VISH - THE WISH GOD FULFILLED
 
 An extraordinary, deeply emotional, cinematic, and highly interactive birthday website for **Dr. Vishwa Jambudiya**.
 

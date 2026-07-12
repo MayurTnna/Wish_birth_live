@@ -1,5 +1,5 @@
 /**
- * VISH — THE WISH GOD FULFILLED
+ * VISH - THE WISH GOD FULFILLED
  * Central Configuration & Global State Manager
  */
 
@@ -28,7 +28,7 @@ const storyConfig = {
     artist: "Ed Sheeran",
     src: "./assets/audio/perfect.mp3",
   },
-  birthdayTarget: "2026-07-12T15:05:00", // Test target date (July 12, 2026, at 13:50:00)
+  birthdayTarget: "2026-07-12T16:05:00", // Test target date (July 12, 2026, at 13:50:00)
 };
 
 // Global App State

@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        showToastNotification("All India Rank 497 — A testament to endless grit! 🎓", 3000);
+        showToastNotification("All India Rank 497 - A testament to endless grit! 🎓", 3000);
     }
 
     // 3. Easter Egg: Spectacles Lens Reflections

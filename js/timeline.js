@@ -3,6 +3,20 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Page security and reload redirection
+    const isUnlocked = sessionStorage.getItem('passcodeUnlocked') === 'true';
+    const fromLoader = sessionStorage.getItem('fromLoader') === 'true';
+
+    if (!isUnlocked) {
+        window.location.href = './index.html';
+        return;
+    } else if (!fromLoader) {
+        window.location.href = './index.html';
+        return;
+    } else {
+        sessionStorage.removeItem('fromLoader');
+    }
+
     // 1. Initialize Smooth Scrolling (Lenis)
     const lenis = new Lenis({
         duration: 1.2,
@@ -144,40 +158,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Classroom interactive items zoom
     function setupClassroomScroll(chapter) {
-        gsap.fromTo('.bench-artwork', 
-            { scale: 0.9, opacity: 0 },
-            {
-                scale: 1,
-                opacity: 1,
-                duration: 1.2,
-                scrollTrigger: {
-                    trigger: chapter,
-                    start: "top 60%"
+        if (document.querySelector('.classroom-benches-layout')) {
+            gsap.fromTo('.classroom-benches-layout', 
+                { scale: 0.9, opacity: 0 },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1.2,
+                    scrollTrigger: {
+                        trigger: chapter,
+                        start: "top 60%"
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     // Different Paths split silhouettes
     function setupPathsScroll(chapter) {
-        gsap.fromTo('.glowing-silhouette.boy', { x: -50 }, {
-            x: -250,
-            scrollTrigger: {
-                trigger: chapter,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1
-            }
-        });
-        gsap.fromTo('.glowing-silhouette.girl', { x: 50 }, {
-            x: 250,
-            scrollTrigger: {
-                trigger: chapter,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1
-            }
-        });
+        if (document.querySelector('.glowing-silhouette.boy')) {
+            gsap.fromTo('.glowing-silhouette.boy', { x: -50 }, {
+                x: -250,
+                scrollTrigger: {
+                    trigger: chapter,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        }
+        if (document.querySelector('.glowing-silhouette.girl')) {
+            gsap.fromTo('.glowing-silhouette.girl', { x: 50 }, {
+                x: 250,
+                scrollTrigger: {
+                    trigger: chapter,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        }
     }
 
     // Tuition garden connect stars puzzle trigger
@@ -194,7 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             window.AudioManager.playSFX('constellation_complete');
                         }
                         // Trigger final text highlight fade
-                        gsap.to('.constellation-complete-message', { opacity: 1, duration: 0.5 });
+                        if (document.querySelector('.constellation-complete-message')) {
+                            gsap.to('.constellation-complete-message', { opacity: 1, duration: 0.5 });
+                        }
                     });
                 }
             },
@@ -207,7 +229,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.StarfieldInstance) {
                     window.StarfieldInstance.startConstellationGame(() => {
                         // Already completed, just reveal completed message
-                        gsap.to('.constellation-complete-message', { opacity: 1, duration: 0.5 });
+                        if (document.querySelector('.constellation-complete-message')) {
+                            gsap.to('.constellation-complete-message', { opacity: 1, duration: 0.5 });
+                        }
                     });
                 }
             },
@@ -221,50 +245,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hostel window rain effect activation
     function setupHostelScroll(chapter) {
-        gsap.fromTo('.hostel-window-container', 
-            { filter: 'blur(5px)', opacity: 0.5 },
-            {
-                filter: 'blur(0px)',
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: chapter,
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: true
+        if (document.querySelector('.hostel-window-container')) {
+            gsap.fromTo('.hostel-window-container', 
+                { filter: 'blur(5px)', opacity: 0.5 },
+                {
+                    filter: 'blur(0px)',
+                    opacity: 1,
+                    scrollTrigger: {
+                        trigger: chapter,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        scrub: true
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     // Letter WA drifting away
     function setupVishwaVishScroll(chapter) {
-        gsap.fromTo('.text-wa', 
-            { x: 0, opacity: 1, scale: 1 },
-            {
-                x: 150,
-                opacity: 0,
-                scale: 0.6,
-                scrollTrigger: {
-                    trigger: chapter,
-                    start: "top 30%",
-                    end: "bottom 70%",
-                    scrub: true
+        if (document.querySelector('.text-wa')) {
+            gsap.fromTo('.text-wa', 
+                { x: 0, opacity: 1, scale: 1 },
+                {
+                    x: 150,
+                    opacity: 0,
+                    scale: 0.6,
+                    scrollTrigger: {
+                        trigger: chapter,
+                        start: "top 30%",
+                        end: "bottom 70%",
+                        scrub: true
+                    }
                 }
-            }
-        );
-        gsap.fromTo('.text-wish-reflection', 
-            { opacity: 0, y: 10 },
-            {
-                opacity: 0.85,
-                y: 0,
-                scrollTrigger: {
-                    trigger: chapter,
-                    start: "top 20%",
-                    end: "bottom 80%",
-                    scrub: true
+            );
+        }
+        if (document.querySelector('.text-wish-reflection')) {
+            gsap.fromTo('.text-wish-reflection', 
+                { opacity: 0, y: 10 },
+                {
+                    opacity: 0.85,
+                    y: 0,
+                    scrollTrigger: {
+                        trigger: chapter,
+                        start: "top 20%",
+                        end: "bottom 80%",
+                        scrub: true
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     // One Word Floating words orbit trigger
@@ -328,19 +358,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Galaxy expansion zooms out
     function setupMeaningScroll(chapter) {
-        gsap.fromTo('.galaxy-canvas-container', 
-            { scale: 0.8, rotate: 0 },
-            {
-                scale: 1.5,
-                rotate: 25,
-                scrollTrigger: {
-                    trigger: chapter,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
+        if (document.querySelector('.galaxy-canvas-container')) {
+            gsap.fromTo('.galaxy-canvas-container', 
+                { scale: 0.8, rotate: 0 },
+                {
+                    scale: 1.5,
+                    rotate: 25,
+                    scrollTrigger: {
+                        trigger: chapter,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     // Rose Garden active state

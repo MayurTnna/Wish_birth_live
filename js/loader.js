@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lockPanel = document.getElementById('gate-lock-panel');
     const passcodeField = document.getElementById('gate-passcode-field');
     const submitBtn = document.getElementById('btn-submit-passcode');
+    const togglePasswordBtn = document.getElementById('btn-toggle-password');
     const errorEl = document.getElementById('gate-validation-error');
     const clockTitle = document.getElementById('clock-title');
 
@@ -19,18 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gate sequence interval handle
     let timerInterval = null;
-
-    // Check if already unlocked in this session
-    const isUnlocked = sessionStorage.getItem('passcodeUnlocked') === 'true';
-    if (isUnlocked) {
-        if (gateOverlay) gateOverlay.style.display = 'none';
-        if (loader) loader.style.display = 'flex';
-        updateLoader();
-    } else {
-        // Hide loader initially
-        if (loader) loader.style.display = 'none';
-        startGateSequence();
-    }
 
     // Stages of memories configuration
     const loadStages = [
@@ -46,6 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let currentProgress = 0;
+
+    // Check if already unlocked in this session
+    const isUnlocked = sessionStorage.getItem('passcodeUnlocked') === 'true';
+    if (isUnlocked) {
+        if (gateOverlay) gateOverlay.style.display = 'none';
+        if (loader) loader.style.display = 'flex';
+        updateLoader();
+    } else {
+        // Hide loader initially
+        if (loader) loader.style.display = 'none';
+        startGateSequence();
+    }
     
     function updateLoader() {
         if (currentProgress < 100) {
@@ -201,6 +202,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (submitBtn) {
         submitBtn.addEventListener('click', verifyPasscode);
+    }
+    if (togglePasswordBtn && passcodeField) {
+        togglePasswordBtn.addEventListener('click', () => {
+            if (passcodeField.type === 'password') {
+                passcodeField.type = 'text';
+                togglePasswordBtn.textContent = '🙈';
+                togglePasswordBtn.setAttribute('aria-label', 'Hide Password');
+            } else {
+                passcodeField.type = 'password';
+                togglePasswordBtn.textContent = '👁️';
+                togglePasswordBtn.setAttribute('aria-label', 'Show Password');
+            }
+        });
     }
     if (passcodeField) {
         passcodeField.addEventListener('keypress', (e) => {
@@ -411,6 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function redirectToStory() {
         // Carry forward the audioEnabled state using sessionStorage
         sessionStorage.setItem('audioEnabled', 'true');
+        sessionStorage.setItem('fromLoader', 'true');
         window.location.href = './story.html';
     }
 });

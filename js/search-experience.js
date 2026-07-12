@@ -30,7 +30,7 @@ class UniverseSearch {
             },
             {
                 q: "What does hardworking look like?",
-                r: "NEET MDS 2026 — AIR 497 🎓"
+                r: "NEET MDS 2026 - AIR 497 🎓"
             },
             {
                 q: "Who is the most beautiful girl in the world?",
