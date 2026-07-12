@@ -28,12 +28,8 @@ class AudioManagerClass {
         if (this.ctx) return;
         
         // Setup Web Audio Context
-        if (window.Howler && window.Howler.ctx) {
-            this.ctx = window.Howler.ctx;
-        } else {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            this.ctx = new AudioContext();
-        }
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        this.ctx = new AudioContext();
         
         // Setup Analyser for visualization
         this.analyser = this.ctx.createAnalyser();
@@ -283,9 +279,9 @@ class AudioManagerClass {
                     }
                     // Route Howler to Web Audio analyzer node if Web Audio is loaded
                     try {
-                        const node = Howler.ctx.createMediaElementSource(this.howlInstance._sounds[0]._node);
+                        const node = this.ctx.createMediaElementSource(this.howlInstance._sounds[0]._node);
                         node.connect(this.analyser);
-                        this.analyser.connect(Howler.ctx.destination);
+                        this.analyser.connect(this.ctx.destination);
                     } catch (e) {
                         console.warn("Could not route to visualizer analyser: ", e);
                     }
