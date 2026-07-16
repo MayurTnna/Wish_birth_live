@@ -142,6 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'ch-12-search':
                 setupSearchScroll(chapter);
                 break;
+            case 'ch-cake-dream':
+                setupCakeDreamScroll(chapter);
+                break;
             case 'ch-14-meaning':
                 setupMeaningScroll(chapter);
                 break;
@@ -343,7 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Google search auto typist triggers
     function setupSearchScroll(chapter) {
         ScrollTrigger.create({
             trigger: chapter,
@@ -351,6 +353,19 @@ document.addEventListener('DOMContentLoaded', () => {
             onEnter: () => {
                 if (window.UniverseSearchInstance) {
                     window.UniverseSearchInstance.startAutoSequence();
+                }
+            }
+        });
+    }
+
+    // Scroll trigger for 3D cake chapter entrance
+    function setupCakeDreamScroll(chapter) {
+        ScrollTrigger.create({
+            trigger: chapter,
+            start: "top 60%",
+            onEnter: () => {
+                if (window.CakeDreamInstance) {
+                    window.CakeDreamInstance.triggerEntrance();
                 }
             }
         });

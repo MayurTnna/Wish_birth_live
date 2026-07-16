@@ -72,6 +72,15 @@ body.achievement-theme {
     --color-gold-glow: rgba(255, 215, 0, 0.5);
 }
 
+body.cake-theme {
+    --color-bg: #04060d;
+    --color-text: #f3f5fa;
+    --color-text-muted: #8c97af;
+    --color-rose: #ff8ea3;
+    --color-gold: #ffbe0b;
+    --color-gold-glow: rgba(255, 190, 11, 0.4);
+}
+
 body.birthday-theme {
     --color-bg: #08020b;
     --color-text: #fdfafc;
@@ -2389,7 +2398,7 @@ body {
     .visual-glass-frame {
         padding: 1.25rem 0.75rem !important;
     }
-    
+
     .lock-card {
         padding: 1.5rem 1rem !important;
     }

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./css/animations.css">
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/accessibility.css">
+    <link rel="stylesheet" href="./css/cake-dream.css">
     
     <!-- Third Party Scripts (CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -466,6 +467,78 @@
             </div>
         </section>
 
+        <!-- CHAPTER - A Dream You Can Finally Cut -->
+        <section id="ch-cake-dream" class="story-chapter" data-theme="cake">
+            <div class="chapter-content-wrapper text-center wide-wrapper">
+                <span class="chapter-badge">Chapter – A Dream You Can Finally Cut</span>
+                <h2 class="chapter-title font-serif">A Dream You Can Finally Cut</h2>
+                
+                <div class="cake-story-intro font-sans max-w-xl mx-auto">
+                    <p>The universe itself gathers to celebrate the dream that became reality. You didn't just study for exams; you crafted a path of dedication, resilience, and faith.</p>
+                    <p class="mt-3 italic text-gold">"Watch the stars assemble your journey..."</p>
+                </div>
+
+                <!-- Interactive Area Container -->
+                <div class="cake-experience-container">
+                    <div class="cake-interaction-area glass-pane">
+                        <!-- Three.js Canvas container -->
+                        <div id="cake-canvas-container" class="cake-canvas-container">
+                            <div class="cake-instructions font-sans">
+                                <span class="instruction-item"><span class="icon">🖱️</span> Drag to Rotate</span>
+                                <span class="instruction-item"><span class="icon">🔍</span> Scroll to Zoom</span>
+                                <span class="instruction-item"><span class="icon">👆</span> Double-click to Focus</span>
+                            </div>
+                        </div>
+
+                        <!-- Control Overlay -->
+                        <div class="cake-ui-overlay">
+                            <button id="btn-cake-celebrate" class="btn btn-premium btn-cake-action magnetic" data-cursor-text="Begin the celebration! ✨" style="display: none;">
+                                <span class="btn-text">Celebrate 🎂</span>
+                                <span class="btn-glow"></span>
+                            </button>
+
+                            <div id="cake-slice-instructions" class="slice-instructions hidden font-sans">
+                                <p>✨ Click the button below to slice the cake beautifully! ✨</p>
+                                <button id="btn-cake-cut-fallback" class="btn btn-premium btn-gold btn-sm mt-3 magnetic" data-cursor-text="Slice the cake! 🔪">Slice Cake 🔪</button>
+                            </div>
+
+                            <div id="cake-wish-container" class="wish-container hidden">
+                                <button id="btn-cake-wish" class="btn btn-premium btn-cake-action pulse-gold magnetic" data-cursor-text="Make a secret wish... 💫">
+                                    <span class="btn-text">Make a Wish 🕯️</span>
+                                    <span class="btn-glow"></span>
+                                </button>
+                                <p class="mic-hint font-sans text-xs mt-2 text-muted">Or blow into your microphone 🎙️</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inside-the-cake Message Overlay (faded in via GSAP) -->
+                <div id="cake-message-panel" class="cake-message-panel hidden glass-pane">
+                    <div class="message-content font-serif">
+                        <p class="msg-line line-1">"Dreams taste sweeter</p>
+                        <p class="msg-line line-2">when they are earned."</p>
+                        <div class="msg-divider"></div>
+                        <p class="msg-line line-3 font-hand text-gold text-3xl mt-4">Congratulations Dr. Vishwa.</p>
+                        <div class="msg-divider"></div>
+                        <p class="msg-line line-4">You didn't just become a dentist.</p>
+                        <p class="msg-line line-5 text-rose">You became the person</p>
+                        <p class="msg-line line-6">your younger self</p>
+                        <p class="msg-line line-7">always dreamed of becoming.</p>
+                    </div>
+                </div>
+
+                <!-- Easter Egg Note Modal -->
+                <div id="cake-easter-egg-modal" class="cake-note-modal hidden">
+                    <div class="cake-note-card font-hand text-center glass-pane">
+                        <button id="btn-close-cake-note" class="close-note-btn">✕</button>
+                        <div class="note-seal">⭐</div>
+                        <p class="note-text mt-4">"It all started<br>with a girl<br>wearing spectacles<br>on the last bench."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- CHAPTER 14: The Meaning of Vishwa -->
         <section id="ch-14-meaning" class="story-chapter" data-theme="star">
             <div class="chapter-content-wrapper text-center">
@@ -845,12 +918,15 @@
     </div>
 
     <!-- Script imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/cursor.js"></script>
     <script src="./js/stars.js"></script>
     <script src="./js/roses.js"></script>
     <script src="./js/audio.js"></script>
     <script src="./js/search-experience.js"></script>
+    <script src="./js/cake-dream.js"></script>
     <script src="./js/birthday.js"></script>
     <script src="./js/easter-eggs.js"></script>
     <script src="./js/timeline.js"></script>
