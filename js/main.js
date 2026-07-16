@@ -28,7 +28,7 @@ const storyConfig = {
     artist: "Ed Sheeran",
     src: "./assets/audio/perfect.mp3",
   },
-  birthdayTarget: "2026-07-15T00:00:00", // Test target date (July 12, 2026, at 13:50:00)
+  birthdayTarget: "2026-07-18T00:00:00", // Test target date (July 12, 2026, at 13:50:00)
 };
 
 // Global App State
